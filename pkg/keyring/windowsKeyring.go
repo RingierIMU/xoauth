@@ -59,8 +59,8 @@ func (service WindowsKeyRingService) GetTokens(item string) (oidc.TokenResultSet
 	identity, err := service.Get(fmt.Sprintf("%s.identity", item))
 	refresh, err := service.Get(fmt.Sprintf("%s.refresh", item))
 
-	// Since these params are optional, ignore not found errors
-	if err.Error() != keyring.ErrNotFound.Error() {
+// Since these params are optional, ignore not found errors
+	if err != nil && err.Error() != keyring.ErrNotFound.Error() {
 		return result, err
 	}
 
